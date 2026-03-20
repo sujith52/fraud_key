@@ -8,5 +8,6 @@ lightgbm
 imbalanced-learn
 shap
 joblib
-streamlit
+streamlit==1.32.2
+altair==4.2.2
 
