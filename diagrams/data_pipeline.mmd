@@ -1,0 +1,57 @@
+flowchart LR
+    subgraph RawData["Raw Insurance Data"]
+        A[Policy & Claim Records]
+        B[Customer Demographics]
+        C[Historical Fraud Labels]
+    end
+
+    subgraph Ingestion["Data Ingestion"]
+        D[Load CSV / Database]
+    end
+
+    subgraph Cleaning["Data Cleaning & Integration"]
+        E[Handle Missing Values]
+        F[Fix Data Types]
+        G[Merge Tables & Drop Duplicates]
+    end
+
+    subgraph Preprocessing["Preprocessing & Feature Engineering"]
+        H[Remove Leakage Features]
+        I[Encode Categorical Variables]
+        J[Scale / Normalize Numeric Features]
+        K[Create Domain Features<br/>Claim to Premium Ratio]
+    end
+
+    subgraph Split["Train / Validation / Test Split"]
+        L[Stratified Split<br/>Preserve Fraud Rate]
+    end
+
+    subgraph Balancing["Class Imbalance Handling"]
+        M[SMOTE / Under-sampling]
+    end
+
+    subgraph Output["Model-Ready Datasets"]
+        N[Train Set]
+        O[Validation Set]
+        P[Test Set]
+    end
+
+    A --> D
+    B --> D
+    C --> D
+
+    D --> E
+    E --> F --> G
+    G --> H --> I --> J --> K
+    K --> L --> M
+    M --> N
+    M --> O
+    M --> P
+
+    classDef raw fill:#f9f5ff,stroke:#7c3aed,stroke-width:2px,color:#111827;
+    classDef process fill:#ecfeff,stroke:#0891b2,stroke-width:2px,color:#0f172a;
+    classDef data fill:#fefce8,stroke:#ca8a04,stroke-width:2px,color:#1f2933;
+
+    class A,B,C raw;
+    class D,E,F,G,H,I,J,K,L,M process;
+    class N,O,P data;

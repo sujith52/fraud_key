@@ -1,0 +1,57 @@
+flowchart LR
+    subgraph Source["Data Sources"]
+        A[Raw Insurance Datasets<br/>CSV or Database]
+    end
+
+    subgraph EDA["Exploratory Data Analysis"]
+        B[eda_main.py]
+        C[EDA Plots & Summaries<br/>Outliers and Distributions]
+    end
+
+    subgraph Preprocess["Preprocessing Utilities"]
+        D[utils/preprocessing.py]
+        E[Cleaned & Engineered<br/>Features Dataset]
+    end
+
+    subgraph Training["Model Training"]
+        F[models/train_models.py]
+        G[Trained Models<br/>Logistic, RF, XGB]
+    end
+
+    subgraph Evaluation["Model Evaluation"]
+        H[evaluation/evaluate_models.py]
+        I[Metrics Tables<br/>CSV or Markdown]
+        J[Comparison Plots<br/>ROC, PR, Accuracy]
+    end
+
+    subgraph Artifacts["Artifacts for Report"]
+        K[Saved Models<br/>Joblib or Pickle Files]
+        L[Figures<br/>PNG from EDA and Evaluation]
+        M[Mermaid Diagrams<br/>MMD Files in diagrams]
+        N[Final Report<br/>report.md and PDF]
+    end
+
+    A --> B --> C
+    A --> D
+    B --> D
+    D --> E
+    E --> F --> G
+    G --> H
+    E --> H
+    H --> I
+    H --> J
+
+    G --> K
+    C --> L
+    J --> L
+    I --> N
+    L --> N
+    M --> N
+
+    classDef data fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0f172a;
+    classDef code fill:#eff6ff,stroke:#6366f1,stroke-width:2px,color:#111827;
+    classDef artifact fill:#f1f5f9,stroke:#0f766e,stroke-width:2px,color:#020617;
+
+    class A,E data;
+    class B,D,F,H code;
+    class C,G,I,J,K,L,M,N artifact;

@@ -1,0 +1,69 @@
+flowchart TD
+    subgraph Input["Input from Trained Models"]
+        A[Best Trained Model]
+        B[Test Set X_test]
+        C[Test Labels y_test]
+    end
+
+    subgraph Predict["Prediction"]
+        D[Generate Predictions<br/>y_pred]
+        E[Prediction Probabilities<br/>y_proba]
+    end
+
+    subgraph Metrics["Evaluation Metrics"]
+        F[Confusion Matrix]
+        G[Precision, Recall, F1-score]
+        H[ROC Curve & AUC]
+        I[Precision-Recall Curve]
+        J[Fraud Recall / TPR<br/>on Positive Class]
+    end
+
+    subgraph BusinessView["Business-Level Evaluation"]
+        K[Estimate False Positives<br/>Legit Flagged as Fraud]
+        L[Estimate False Negatives<br/>Fraud Missed]
+        M[Cost-Based Analysis<br/>Cost Matrix]
+    end
+
+    subgraph Reporting["Reporting & Visualization"]
+        N[Save Metrics Table<br/>CSV or Markdown]
+        O[Generate Plots<br/>PNG and PDF]
+        P[Summarize Findings<br/>in Report]
+    end
+
+    A --> D
+    B --> D
+    B --> E
+    C --> F
+    D --> F
+    C --> G
+    D --> G
+    C --> H
+    E --> H
+    C --> I
+    E --> I
+    G --> J
+
+    F --> K
+    G --> K
+    F --> L
+    G --> L
+    K --> M
+    L --> M
+
+    F --> N
+    G --> N
+    H --> N
+    I --> N
+    N --> O --> P
+    M --> P
+
+    classDef model fill:#ecfdf5,stroke:#22c55e,stroke-width:2px,color:#064e3b;
+    classDef data fill:#eff6ff,stroke:#2563eb,stroke-width:2px,color:#111827;
+    classDef metric fill:#fff7ed,stroke:#ea580c,stroke-width:2px,color:#7c2d12;
+    classDef report fill:#fdf2ff,stroke:#c026d3,stroke-width:2px,color:#3b0764;
+
+    class A model;
+    class B,C data;
+    class F,G,H,I,J metric;
+    class K,L,M metric;
+    class N,O,P report;

@@ -1,0 +1,38 @@
+DATASET INFO
+<class 'pandas.DataFrame'>
+RangeIndex: 6362620 entries, 0 to 6362619
+Data columns (total 15 columns):
+ #   Column              Dtype  
+---  ------              -----  
+ 0   step                int64  
+ 1   type                str    
+ 2   amount              float64
+ 3   oldbalanceOrg       float64
+ 4   newbalanceOrig      float64
+ 5   oldbalanceDest      float64
+ 6   newbalanceDest      float64
+ 7   isFraud             int64  
+ 8   isFlaggedFraud      int64  
+ 9   balanceOrigDiff     float64
+ 10  balanceDestDiff     float64
+ 11  errorBalanceOrig    float64
+ 12  errorBalanceDest    float64
+ 13  isLargeTransaction  int64  
+ 14  transactionHour     int64  
+dtypes: float64(9), int64(5), str(1)
+memory usage: 728.1 MB
+
+
+BASIC DESCRIPTIVE STATISTICS
+                step      type        amount  oldbalanceOrg  newbalanceOrig  oldbalanceDest  newbalanceDest       isFraud  isFlaggedFraud  balanceOrigDiff  balanceDestDiff  errorBalanceOrig  errorBalanceDest  isLargeTransaction  transactionHour
+count   6.362620e+06   6362620  6.362620e+06   6.362620e+06    6.362620e+06    6.362620e+06    6.362620e+06  6.362620e+06    6.362620e+06     6.362620e+06     6.362620e+06      6.362620e+06      6.362620e+06        6.362620e+06     6.362620e+06
+unique           NaN         5           NaN            NaN             NaN             NaN             NaN           NaN             NaN              NaN              NaN               NaN               NaN                 NaN              NaN
+top              NaN  CASH_OUT           NaN            NaN             NaN             NaN             NaN           NaN             NaN              NaN              NaN               NaN               NaN                 NaN              NaN
+freq             NaN   2237500           NaN            NaN             NaN             NaN             NaN           NaN             NaN              NaN              NaN               NaN               NaN                 NaN              NaN
+mean    2.433972e+02       NaN  1.798619e+05   8.338831e+05    8.551137e+05    1.100702e+06    1.224996e+06  1.290820e-03    2.514687e-06    -2.123056e+04     1.242947e+05     -2.010925e+05      5.556717e+04        2.630316e-01     1.532145e+01
+std     1.423320e+02       NaN  6.038582e+05   2.888243e+06    2.924049e+06    3.399180e+06    3.674129e+06  3.590480e-02    1.585775e-03     1.466433e+05     8.129391e+05      6.066505e+05      4.415288e+05        4.402795e-01     4.321799e+00
+min     1.000000e+00       NaN  0.000000e+00   0.000000e+00    0.000000e+00    0.000000e+00    0.000000e+00  0.000000e+00    0.000000e+00    -1.915268e+06    -1.306083e+07     -9.244552e+07     -7.588573e+07        0.000000e+00     0.000000e+00
+25%     1.560000e+02       NaN  1.338957e+04   0.000000e+00    0.000000e+00    0.000000e+00    0.000000e+00  0.000000e+00    0.000000e+00     0.000000e+00     0.000000e+00     -2.496411e+05      0.000000e+00        0.000000e+00     1.200000e+01
+50%     2.390000e+02       NaN  7.487194e+04   1.420800e+04    0.000000e+00    1.327057e+05    2.146614e+05  0.000000e+00    0.000000e+00     0.000000e+00     0.000000e+00     -6.867726e+04      3.500490e+03        0.000000e+00     1.600000e+01
+75%     3.350000e+02       NaN  2.087215e+05   1.073152e+05    1.442584e+05    9.430367e+05    1.111909e+06  0.000000e+00    0.000000e+00     1.015044e+04     1.491054e+05     -2.954230e+03      2.935305e+04        1.000000e+00     1.900000e+01
+max     7.430000e+02       NaN  9.244552e+07   5.958504e+07    4.958504e+07    3.560159e+08    3.561793e+08  1.000000e+00    1.000000e+00     1.000000e+07     1.056878e+08      1.000000e-02      1.319123e+07        1.000000e+00     2.300000e+01
