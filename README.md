@@ -126,3 +126,6 @@ pip install -r requirements.txt
 - The dataset is large (~6M rows). Ensure you have sufficient memory, or reduce data via `nrows` in `utils/data_loader.load_raw_data` for experimentation.
 - All plotting code uses sampling where appropriate to keep runtime and memory usage manageable.  Port usage is not required for this project.
 
+```bash
+python -m streamlit run streamlit_app.py
+```

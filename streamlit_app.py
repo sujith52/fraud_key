@@ -19,10 +19,86 @@ from utils.data_loader import load_raw_data
 from utils.preprocessing import TARGET_COL
 
 
+
 MODELS_DIR = os.path.join(ROOT_DIR, "models", "saved_models")
 EDA_PLOTS_DIR = os.path.join(ROOT_DIR, "eda", "plots")
 EVAL_PLOTS_DIR = os.path.join(ROOT_DIR, "evaluation", "plots")
 
+
+
+import hashlib
+
+USERS_FILE = "users.csv"
+
+def hash_password(password):
+    return hashlib.sha256(password.encode()).hexdigest()
+
+def load_users():
+    if not os.path.exists(USERS_FILE):
+        return pd.DataFrame(columns=["username", "password"])
+    return pd.read_csv(USERS_FILE)
+
+def save_user(username, password):
+    df = load_users()
+
+    # prevent duplicate users
+    if username in df["username"].values:
+        return False
+
+    new_user = pd.DataFrame([{
+        "username": username,
+        "password": hash_password(password)
+    }])
+
+    df = pd.concat([df, new_user], ignore_index=True)
+    df.to_csv(USERS_FILE, index=False)
+    return True
+
+def authenticate(username, password):
+    df = load_users()
+    hashed = hash_password(password)
+
+    user = df[(df["username"] == username) & (df["password"] == hashed)]
+    return not user.empty
+
+def login_register():
+    if "logged_in" not in st.session_state:
+        st.session_state.logged_in = False
+
+    # ✅ IF already logged in → DON'T show login page
+    if st.session_state.logged_in:
+        return
+
+    menu = st.sidebar.selectbox("Menu", ["Login", "Register"])
+
+    if menu == "Login":
+        st.subheader("Login")
+
+        username = st.text_input("Username")
+        password = st.text_input("Password", type="password")
+
+        if st.button("Login"):
+            if authenticate(username, password):
+                st.session_state.logged_in = True
+                st.success("Login successful ✅")
+                st.rerun()
+            else:
+                st.error("Invalid credentials ❌")
+
+    else:
+        st.subheader("Register")
+
+        new_user = st.text_input("Create Username")
+        new_pass = st.text_input("Create Password", type="password")
+
+        if st.button("Register"):
+            if new_user == "" or new_pass == "":
+                st.warning("Enter details ⚠️")
+            else:
+                if save_user(new_user, new_pass):
+                    st.success("Registered ✅")
+                else:
+                    st.error("User already exists ❌")
 
 @st.cache_resource(show_spinner=False)
 def load_metadata_and_models() -> tuple[Optional[dict], Dict[str, object]]:
@@ -435,11 +511,25 @@ def main() -> None:
         page_title="Insurance Fraud Detection Dashboard",
         layout="wide",
     )
+
+    # 🔐 Step 1: Show login/register page
+    login_register()
+
+    # 🚫 Step 2: Stop if not logged in
+    if not st.session_state.get("logged_in", False):
+        st.stop()
+
+    # ✅ Step 3: Dashboard starts AFTER login
     st.title("Insurance Fraud Detection – Interactive Dashboard")
     st.markdown(
         "Use this Streamlit app to explore EDA results, inspect model evaluation, "
         "and run fraud predictions on new transaction data."
     )
+
+    # 🔓 Logout button
+    if st.sidebar.button("Logout"):
+        st.session_state.logged_in = False
+        st.rerun()
 
     meta, models = load_metadata_and_models()
 

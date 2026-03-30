@@ -1,26 +1,37 @@
 DATASET INFO
 <class 'pandas.core.frame.DataFrame'>
-RangeIndex: 6362620 entries, 0 to 6362619
-Data columns (total 15 columns):
- #   Column              Dtype  
----  ------              -----  
- 0   step                int64  
- 1   type                object 
- 2   amount              float64
- 3   oldbalanceOrg       float64
- 4   newbalanceOrig      float64
- 5   oldbalanceDest      float64
- 6   newbalanceDest      float64
- 7   isFraud             int64  
- 8   isFlaggedFraud      int64  
- 9   balanceOrigDiff     float64
- 10  balanceDestDiff     float64
- 11  errorBalanceOrig    float64
- 12  errorBalanceDest    float64
- 13  isLargeTransaction  int64  
- 14  transactionHour     int64  
-dtypes: float64(9), int64(5), object(1)
-memory usage: 728.1+ MB
+RangeIndex: 1029 entries, 0 to 1028
+Data columns (total 14 columns):
+ #   Column              Non-Null Count  Dtype  
+---  ------              --------------  -----  
+ 0   step                1029 non-null   int64  
+ 1   type                1029 non-null   object 
+ 2   amount              1029 non-null   float64
+ 3   oldbalanceOrg       1029 non-null   float64
+ 4   newbalanceOrig      1029 non-null   float64
+ 5   oldbalanceDest      1029 non-null   float64
+ 6   newbalanceDest      1029 non-null   float64
+ 7   isFraud             1029 non-null   int64  
+ 8   balanceOrigDiff     1029 non-null   float64
+ 9   balanceDestDiff     1029 non-null   float64
+ 10  errorBalanceOrig    1029 non-null   float64
+ 11  errorBalanceDest    1029 non-null   float64
+ 12  isLargeTransaction  1029 non-null   int64  
+ 13  transactionHour     1029 non-null   int64  
+dtypes: float64(9), int64(4), object(1)
+memory usage: 112.7+ KB
 
 
 BASIC DESCRIPTIVE STATISTICS
+          step     type        amount  oldbalanceOrg  newbalanceOrig  oldbalanceDest  newbalanceDest      isFraud  balanceOrigDiff  balanceDestDiff  errorBalanceOrig  errorBalanceDest  isLargeTransaction  transactionHour
+count   1029.0     1029  1.029000e+03   1.029000e+03    1.029000e+03    1.029000e+03    1.029000e+03  1029.000000     1.029000e+03     1.029000e+03      1.029000e+03      1.029000e+03         1029.000000           1029.0
+unique     NaN        5           NaN            NaN             NaN             NaN             NaN          NaN              NaN              NaN               NaN               NaN                 NaN              NaN
+top        NaN  PAYMENT           NaN            NaN             NaN             NaN             NaN          NaN              NaN              NaN               NaN               NaN                 NaN              NaN
+freq       NaN      460           NaN            NaN             NaN             NaN             NaN          NaN              NaN              NaN               NaN               NaN                 NaN              NaN
+mean       1.0      NaN  1.162113e+05   8.421122e+05    8.616793e+05    6.504602e+05    1.199605e+06     0.008746    -1.956705e+04     5.491444e+05     -1.357783e+05     -4.329332e+05            0.172983              1.0
+std        0.0      NaN  2.458503e+05   2.052886e+06    2.102140e+06    2.034839e+06    3.399078e+06     0.093157     9.885808e+04     2.061949e+06      2.669861e+05      1.971881e+06            0.378417              0.0
+min        1.0      NaN  8.730000e+00   0.000000e+00    0.000000e+00    0.000000e+00    0.000000e+00     0.000000    -7.647730e+05    -4.940960e+06     -2.545478e+06     -1.791996e+07            0.000000              1.0
+25%        1.0      NaN  4.376460e+03   0.000000e+00    0.000000e+00    0.000000e+00    0.000000e+00     0.000000     0.000000e+00    -1.771920e+03     -1.663353e+05     -2.463278e+04            0.000000              1.0
+50%        1.0      NaN  1.352716e+04   1.512300e+04    5.898350e+03    2.242500e+04    0.000000e+00     0.000000     6.614000e+01     0.000000e+00     -9.920520e+03      4.946030e+03            0.000000              1.0
+75%        1.0      NaN  1.411112e+05   1.053890e+05    9.956191e+04    4.139766e+05    5.575373e+05     0.000000     4.013010e+03     1.504560e+05      0.000000e+00      4.380991e+04            0.000000              1.0
+max        1.0      NaN  2.545478e+06   9.716462e+06    9.987287e+06    1.770000e+07    1.920000e+07     1.000000     1.277213e+06     1.829982e+07      7.100000e-01      5.047595e+06            1.000000              1.0
