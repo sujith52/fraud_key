@@ -116,6 +116,7 @@ def inject_custom_css() -> None:
 
     h1 {
         font-size: 2.5rem !important;
+        color: #ffffff !important; 
         background: var(--gradient-1) !important;
         -webkit-background-clip: text !important;
         -webkit-text-fill-color: transparent !important;
