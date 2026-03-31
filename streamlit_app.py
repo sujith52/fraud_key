@@ -727,7 +727,7 @@ def render_prediction_section(meta: Optional[dict], models: Dict[str, object]) -
                 key="batch_csv_uploader",
             )
         with col_sample:
-            use_sample = st.button("📂 Load sample from dataset.csv")
+            use_sample = False
 
         df_raw: Optional[pd.DataFrame] = None
 
@@ -780,8 +780,14 @@ def render_prediction_section(meta: Optional[dict], models: Dict[str, object]) -
                 if y_true is not None and len(y_true) == len(result_df):
                     result_df[TARGET_COL] = y_true
 
-                st.markdown("**✅ Batch prediction results (top 100 rows)**")
-                st.dataframe(result_df.head(100))
+                st.markdown("**✅ Batch prediction results (top 1000 rows)**")
+                st.dataframe(result_df.sample(min(1000, len(result_df))))
+                st.download_button(
+                    "⬇️ Download Full Results",
+                    result_df.to_csv(index=False),
+                    "predictions.csv",
+                    "text/csv"
+                )
 
                 st.markdown("**📊 Summary**")
                 col_total, col_fraud = st.columns(2)
@@ -916,7 +922,7 @@ def render_prediction_section(meta: Optional[dict], models: Dict[str, object]) -
 
 def main() -> None:
     st.set_page_config(
-        page_title="Insurance Fraud Detection Dashboard",
+        page_title="Transaction Fraud Detection Dashboard",
         layout="wide",
         initial_sidebar_state="expanded",
     )
@@ -932,7 +938,7 @@ def main() -> None:
         st.stop()
 
     # ✅ Step 3: Dashboard starts AFTER login
-    st.title("🔍 Insurance Fraud Detection – Interactive Dashboard")
+    st.title("🔍 Transaction Fraud Detection – Interactive Dashboard")
     st.markdown(
         "Explore comprehensive EDA results, inspect model evaluation metrics, and run intelligent fraud predictions on transaction data."
     )
